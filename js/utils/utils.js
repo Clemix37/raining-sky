@@ -36,4 +36,4 @@ function spawnPowerUp(){
     });
 }
 
-export { spawnStar? spawnPowerUp };
+export { spawnStar, spawnPowerUp };
