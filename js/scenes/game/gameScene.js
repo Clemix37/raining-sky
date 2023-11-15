@@ -128,7 +128,7 @@ function loadGameScene(){
         });
 
         // When colliding with a powerUp, we want to add confettis, 100 to the score and destroy the power
-        bean.onCollide("power", (powerUp) => {
+        bean.onCollide("POWER", (powerUp) => {
             addConfetti({ pos: bean.pos });
             score += 100;
             destroy(power);
