@@ -131,7 +131,7 @@ function loadGameScene(){
         bean.onCollide("POWER", (powerUp) => {
             addConfetti({ pos: bean.pos });
             score += 100;
-            destroy(power);
+            destroy(powerUp);
         });
 
         // We change the score and display it
