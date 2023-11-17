@@ -1,4 +1,5 @@
 import { loadScenes } from "./scenes/scenes.js";
+import { loadSprites } from "./sprites/sprites.js";
 import { kaboom } from "./utils/kaboom.js";
 
 // Game
@@ -7,7 +8,7 @@ kaboom({
     scale: 1,
 });
 
-loadBean();
+loadSprites();
 loadScenes();
 
 go("menu");

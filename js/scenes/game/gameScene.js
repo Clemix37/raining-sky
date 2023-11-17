@@ -3,10 +3,14 @@ import { spawnStar, spawnPowerUp, addConfetti } from "../../utils/utils.js";
 
 let score = 0;
 
-function goLeft(obj){
+function goLeft(obj, relatedObj){
+    // We don't want to go farther than left related object
+    if(obj.pos.x <= relatedObj.pos.x) return;
     obj.move(-SPEED_USER, 0);
 }
-function goRight(obj){
+function goRight(obj, relatedObj){
+    // We don't want to go farther than right related object
+    if((obj.pos.x + obj.width) >= relatedObj.width) return;
     obj.move(SPEED_USER, 0);
 }
 
@@ -30,8 +34,8 @@ function loadGameScene(){
             pos(width() / 2, 0),
         ]);
         
-        // Add platform
-        add([
+        // Add slider
+        const slider = add([
             rect(width() - (2*MARGINS), 50, { radius: 50 }),
             pos(MARGINS, height() - 100),
             outline(4), // border
@@ -41,8 +45,8 @@ function loadGameScene(){
         ]);
 
         // Add player
-        const bean = add([
-            sprite("bean"),
+        const player = add([
+            sprite("player"),
             pos(width() / 2, height() - 150),
             scale(2.5),
             area(),
@@ -55,28 +59,28 @@ function loadGameScene(){
         //#region Events
 
         // LEFT
-        onKeyDown("left", () => goLeft(bean));
-        onKeyDown("q", () => goLeft(bean));
+        onKeyDown("left", () => goLeft(player, slider));
+        onKeyDown("q", () => goLeft(player, slider));
         // RIGHT
-        onKeyDown("right", () => goRight(bean));
-        onKeyDown("d", () => goRight(bean));
+        onKeyDown("right", () => goRight(player, slider));
+        onKeyDown("d", () => goRight(player, slider));
         
         /**
          * When colliding with a star,
-         * We hurt bean, remove hp, display kaboom and shake screen
+         * We hurt player, remove hp, display kaboom and shake screen
          * If no hp remains, go to the score scene
          */
-        bean.onCollide("star", (tree) => {
-            addKaboom(bean.pos);
+        player.onCollide("star", (tree) => {
+            addKaboom(player.pos);
             shake();
-            bean.hurt(1);
+            player.hurt(1);
             destroy(tree);
-            if(bean.hp() <= 0) go("lose", score); // go to "lose" scene here
+            if(player.hp() <= 0) go("lose", score); // go to "lose" scene here
         });
 
         // When colliding with a powerUp, we want to add confettis, 100 to the score and destroy the power
-        bean.onCollide("power", (powerUp) => {
-            addConfetti({ pos: bean.pos });
+        player.onCollide("power", (powerUp) => {
+            addConfetti({ pos: player.pos });
             score += 100;
             destroy(powerUp);
         });

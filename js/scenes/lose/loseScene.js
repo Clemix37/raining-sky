@@ -2,7 +2,7 @@ function loadLoseScene(){
     // Lose Scene
     scene("lose", (score) => {
         add([
-            sprite("bean"),
+            sprite("player"),
             pos(width() / 2, height() / 2 - 80),
             scale(2),
             anchor("center"),
