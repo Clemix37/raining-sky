@@ -30,7 +30,9 @@ function loadGameScene(){
 
         // Display Score
         const scoreLabel = add([
-            text(score),
+            text(score, {
+                size: 50,
+            }),
             pos(width() / 2, 0),
         ]);
         
@@ -80,9 +82,19 @@ function loadGameScene(){
 
         // When colliding with a powerUp, we want to add confettis, 100 to the score and destroy the power
         player.onCollide("power", (powerUp) => {
+            const pointsAdded = 100;
             addConfetti({ pos: player.pos });
-            score += 100;
+            score += pointsAdded;
             destroy(powerUp);
+            const txtScoreAddedLabel = add([
+                text(`+${pointsAdded}`, {
+                    size: 70,
+                }),
+                pos(width() / 2, height() / 2),
+            ]);
+            setTimeout(() => {
+                destroy(txtScoreAddedLabel);
+            }, 2000);
         });
 
         // We change the score and display it
