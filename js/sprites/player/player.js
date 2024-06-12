@@ -1,3 +1,3 @@
 export function loadPlayerSprite(){
-    loadSprite("player", "../sprites/bean.png");
+    loadSprite("player", "./sprites/bean.png");
 }
