@@ -22,4 +22,4 @@ function loadLoseScene(){
     });
 }
 
-export {loadLoseScene};
+export { loadLoseScene };

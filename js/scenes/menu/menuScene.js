@@ -34,4 +34,4 @@ function loadMenu(){
     });
 }
 
-export {loadMenu};
+export { loadMenu };

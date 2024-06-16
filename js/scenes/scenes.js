@@ -8,4 +8,4 @@ function loadScenes(){
     loadLoseScene();
 }
 
-export {loadScenes};
+export { loadScenes };
